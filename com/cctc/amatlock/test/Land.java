@@ -20,6 +20,20 @@ public class Land extends CoreObject{
     @Override
     public void tick()
     {
+        if(x < -5)
+        {
+            setVelX(5);
+        }
+        if(x + width > Reference.WIDTH )
+        {
+            setVelX(-5);
+        }
+
+        x += getVelX();
+        y += getVelY();
+
+
+
 
     }
 

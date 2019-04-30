@@ -109,6 +109,7 @@ public class Screen extends Canvas implements Runnable
         land5.tick();
         land6.tick();
 
+
         player.tick();
 
         cpu1.tick();
@@ -120,17 +121,20 @@ public class Screen extends Canvas implements Runnable
     public void init()
     {
         ResourceLoader.loadImages();    // loads images from files.
+        land1 = new Land(111,Reference.CENTER_Y - 111,Reference.WIDTH/4, 25, Color.BLUE );
+       land2 = new Land(222,Reference.CENTER_Y - 222,Reference.WIDTH/4,25 ,Color.BLUE );
+       land3 = new Land( 333,Reference.CENTER_Y -  155,Reference.WIDTH/4,25 ,Color.BLUE);
 
-       land1 = new Land(100,Reference.CENTER_Y - 100,Reference.WIDTH/4, 25, Color.BLUE );
-       land2 = new Land(0,Reference.CENTER_Y - 200,Reference.WIDTH/4,25 ,Color.BLACK );
-       land3 = new Land(100,Reference.CENTER_Y - 150 ,Reference.WIDTH/4,25 ,Color.BLUE);
-        land4 = new Land(0,Reference.CENTER_Y - -175 ,Reference.WIDTH/4, 25, Color.BLACK );
-        land5 = new Land(100,Reference.CENTER_Y - - 100 ,Reference.WIDTH/4,25 ,Color.BLUE);
-        land6 = new Land(0,Reference.CENTER_Y - -50,Reference.WIDTH/4 ,25 ,Color.BLACK );
+       land4 = new Land(333,Reference.CENTER_Y - - 155,Reference.WIDTH/4,25,Color.BLUE);
+       land5 = new Land(222,Reference.CENTER_Y - - 222 ,Reference.WIDTH/4,25 ,Color.BLUE);
+       land6 = new Land(111,Reference.CENTER_Y - - 111,Reference.WIDTH/4 ,25 ,Color.BLUE );
 
        player = new Bird(40,190,30,30,Color.getHSBColor( 57,9,16 ) );
 
        cpu1 = new Bird(Reference.CENTER_X - 50,0,40,40,Color.BLUE);
+
+        land6.setVelX(-1);
+
 
        KeyInput keyInput = new KeyInput();
         this.addKeyListener(keyInput);
