@@ -5,7 +5,7 @@ import java.awt.*;
 public class Bird extends CoreObject{
 
 
-    private boolean jumping = false;
+    public boolean jumping = false;
     private boolean falling = true;
     /**
      * Creates the core object. All subclasses
@@ -24,18 +24,17 @@ public class Bird extends CoreObject{
 
     private boolean onGround()
     {
-        Land land1 = Screen.getInstance().land1;
-        Land land2 = Screen.getInstance().land2;
-        Land land3 = Screen.getInstance().land3;
-        Land land4 = Screen.getInstance().land4;
-        Land land5 = Screen.getInstance().land5;
-        Land land6 = Screen.getInstance().land6;
-
-        if(intersects(land1) || intersects(land2) || intersects(land3) || intersects(land4) || intersects(land5) || intersects(land6) )
+        for(int i = 0; i < Screen.getObjectCounter(); i++)
         {
-            setVelY(0);
-            return true;
+            CoreObject obj = Screen.getCoreObjects()[i];
+            if( obj.intersects(this))
+            {
+                setVelY(0);
+                return true;
+            }
         }
+
+
         return false;
     }
 
@@ -54,28 +53,26 @@ public class Bird extends CoreObject{
     @Override
     public void tick()
     {
-        x += velX;
-        y += velY;
-
         if(jumping)
         {
-            velY--;
-            if(velY == -21)
-            {
-                jumping = false;
-                falling = true;
-            }
+            y -= 10;
+            setVelY(-10);
+            jumping = false;
         }
 
-        if(falling)
+        if(onGround() && !jumping )
         {
-            setVelY(3);
-        }
-        if(onGround() )
-        {
+            falling = false;
             setVelY(0);
         }
+        else
+        {
+            velY += 0.997;
+        }
 
+
+        x += velX;
+        y += velY;
 
 
     }

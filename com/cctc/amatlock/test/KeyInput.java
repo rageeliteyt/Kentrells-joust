@@ -19,24 +19,17 @@ public class KeyInput implements KeyListener
 
         if(e.getKeyCode() == KeyEvent.VK_LEFT)
         {
-            player.setVelX(-3);
+            player.setVelX(-5);
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
         {
-            player.setVelX(3);
+            player.setVelX(5);
         }
         else if(e.getKeyCode() == KeyEvent.VK_SPACE)
         {
+            player.jumping = true;
             player.setVelY(-21);
         }
-//        else if(e.getKeyCode() == KeyEvent.VK_R)
-//        {
-//            player.
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-//        {
-//            player.setVelY(1);
-//        }
 
     }
 
@@ -47,11 +40,11 @@ public class KeyInput implements KeyListener
         Bird player = Screen.getInstance().player;
         if(e.getKeyCode() == KeyEvent.VK_LEFT)
         {
-            player.setVelX(-3);
+            player.setVelX(-5);
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
         {
-            player.setVelX(3);
+            player.setVelX(5);
         }
 
     }

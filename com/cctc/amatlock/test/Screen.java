@@ -2,7 +2,9 @@ package com.cctc.amatlock.test;
 
 import com.cctc.amatlock.test.utilities.Images;
 import com.cctc.amatlock.test.utilities.ResourceLoader;
+import com.cctc.amatlock.test.utilities.Sounds;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -27,6 +29,7 @@ public class Screen extends Canvas implements Runnable
     public Land land4;
     public Land land5;
     public Land land6;
+    public Land land7;
     public Bird cpu1;
 
 
@@ -67,12 +70,16 @@ public class Screen extends Canvas implements Runnable
     }
     public void drawForeground(Graphics g)
     {
-        land1.render(g);
-        land2.render(g);
-        land3.render(g);
-        land4.render(g);
-        land5.render(g);
-        land6.render(g);
+
+
+
+        for(int i = 0; i < objectCounter; i++)
+        {
+            CoreObject obj = coreObjects[i];
+            obj.render(g);
+        }
+
+
 
         player.render(g);
 
@@ -102,12 +109,13 @@ public class Screen extends Canvas implements Runnable
     public void tick()
     {
 
-        land1.tick();
-        land2.tick();
-        land3.tick();
-        land4.tick();
-        land5.tick();
-        land6.tick();
+
+
+        for(int i = 0; i < objectCounter; i++)
+        {
+            CoreObject obj = coreObjects[i];
+            obj.tick();
+        }
 
 
         player.tick();
@@ -120,20 +128,39 @@ public class Screen extends Canvas implements Runnable
      */
     public void init()
     {
-        ResourceLoader.loadImages();    // loads images from files.
-        land1 = new Land(111,Reference.CENTER_Y - 111,Reference.WIDTH/4, 25, Color.BLUE );
+        ResourceLoader.loadImages(); // loads images from files.
+        ResourceLoader.loadSounds();
+
+        Sounds.background.start();
+        Sounds.background.loop(Clip.LOOP_CONTINUOUSLY);
+
+        land1 = new Land(111,Reference.CENTER_Y - 111,Reference.WIDTH/4, 25, Color.RED );
        land2 = new Land(222,Reference.CENTER_Y - 222,Reference.WIDTH/4,25 ,Color.BLUE );
-       land3 = new Land( 333,Reference.CENTER_Y -  155,Reference.WIDTH/4,25 ,Color.BLUE);
+       land3 = new Land( 333,Reference.CENTER_Y -  155,Reference.WIDTH/4,25 ,Color.BLACK);
 
-       land4 = new Land(333,Reference.CENTER_Y - - 155,Reference.WIDTH/4,25,Color.BLUE);
-       land5 = new Land(222,Reference.CENTER_Y - - 222 ,Reference.WIDTH/4,25 ,Color.BLUE);
-       land6 = new Land(111,Reference.CENTER_Y - - 111,Reference.WIDTH/4 ,25 ,Color.BLUE );
+       land4 = new Land(333,Reference.CENTER_Y - - 155,Reference.WIDTH/4,25,Color.WHITE);
+       land5 = new Land(222,Reference.CENTER_Y - - 222 ,Reference.WIDTH,25 ,Color.WHITE);
 
-       player = new Bird(40,190,30,30,Color.getHSBColor( 57,9,16 ) );
 
-       cpu1 = new Bird(Reference.CENTER_X - 50,0,40,40,Color.BLUE);
+       land6 = new Land(111,Reference.CENTER_Y - - 111,Reference.WIDTH/4 ,25 ,Color.CYAN);
+
+
+        land7 = new Land(150,Reference.CENTER_Y - 0,Reference.CENTER_X ,25 ,Color.BLUE );
+
+        addObject(land1);
+        addObject(land2);
+        addObject(land3);
+        addObject(land4);
+        addObject(land5);
+        addObject(land6);
+        addObject(land7);
+
+        player = new Bird(275,210,30,30,Color.getHSBColor( 57,9,16 ) );
+
+       cpu1 = new Bird(Reference.CENTER_X - 150,0,40,40,Color.BLACK);
 
         land6.setVelX(-1);
+        land3.setVelX(1);
 
 
        KeyInput keyInput = new KeyInput();

@@ -20,7 +20,7 @@ public class Land extends CoreObject{
     @Override
     public void tick()
     {
-        if(x < -5)
+        if(x < -1)
         {
             setVelX(5);
         }
