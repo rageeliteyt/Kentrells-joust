@@ -25,7 +25,7 @@ public class Screen extends Canvas implements Runnable
     public Bird player;
     public Land land1;
     public Land land2;
-    public Land land3;
+
     public Land land4;
     public Land land5;
     public Land land6;
@@ -70,15 +70,11 @@ public class Screen extends Canvas implements Runnable
     }
     public void drawForeground(Graphics g)
     {
-
-
-
         for(int i = 0; i < objectCounter; i++)
         {
             CoreObject obj = coreObjects[i];
             obj.render(g);
         }
-
 
 
         player.render(g);
@@ -119,7 +115,6 @@ public class Screen extends Canvas implements Runnable
 
 
         player.tick();
-
         cpu1.tick();
     }
 
@@ -136,7 +131,7 @@ public class Screen extends Canvas implements Runnable
 
         land1 = new Land(111,Reference.CENTER_Y - 111,Reference.WIDTH/4, 25, Color.RED );
        land2 = new Land(222,Reference.CENTER_Y - 222,Reference.WIDTH/4,25 ,Color.BLUE );
-       land3 = new Land( 333,Reference.CENTER_Y -  155,Reference.WIDTH/4,25 ,Color.BLACK);
+
 
        land4 = new Land(333,Reference.CENTER_Y - - 155,Reference.WIDTH/4,25,Color.WHITE);
        land5 = new Land(222,Reference.CENTER_Y - - 222 ,Reference.WIDTH,25 ,Color.WHITE);
@@ -149,7 +144,7 @@ public class Screen extends Canvas implements Runnable
 
         addObject(land1);
         addObject(land2);
-        addObject(land3);
+
         addObject(land4);
         addObject(land5);
         addObject(land6);
@@ -160,7 +155,7 @@ public class Screen extends Canvas implements Runnable
        cpu1 = new Bird(Reference.CENTER_X - 150,0,40,40,Color.BLACK);
 
         land6.setVelX(-1);
-        land3.setVelX(1);
+
 
 
        KeyInput keyInput = new KeyInput();

@@ -27,27 +27,25 @@ public class Bird extends CoreObject{
         for(int i = 0; i < Screen.getObjectCounter(); i++)
         {
             CoreObject obj = Screen.getCoreObjects()[i];
-            if( obj.intersects(this))
+
+            Rectangle top = new Rectangle(obj.x, obj.y, obj.width, 1);
+            Rectangle bottom = new Rectangle(obj.x, obj.y + obj.height, obj.width, 1);
+
+            if( top.intersects(this))
             {
                 setVelY(0);
+                y = top.y - height;
                 return true;
+            }
+
+            if( bottom.intersects(this))
+            {
+                setVelY(2);
             }
         }
 
-
         return false;
     }
-
-//    private boolean isFalling()
-//    {
-//        if(onGround() == false)
-//        {
-//            falling = true;
-//        }
-//        return false;
-//    }
-
-
 
 
     @Override
@@ -55,19 +53,17 @@ public class Bird extends CoreObject{
     {
         if(jumping)
         {
-            y -= 10;
-            setVelY(-10);
+            setVelY(-15);
             jumping = false;
         }
-
-        if(onGround() && !jumping )
+        else if(onGround())
         {
             falling = false;
             setVelY(0);
         }
         else
         {
-            velY += 0.997;
+            velY += 0.697;
         }
 
 
